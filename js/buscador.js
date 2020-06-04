@@ -138,12 +138,31 @@ function obtenerAutos() {
     ];
 }
 
-// Event Listener
+// Datos para la busqueda
+let datosBusqueda = {
+    marca: '',
+    year: '',
+    minimo: '',
+    maximo: '',
+    puertas: '',
+    transimision: '',
+    color: ''
+}
 
+// Event Listener DOM Loaded
 const autos = obtenerAutos();
 
 document.addEventListener('DOMContentLoaded', () => {
     mostrarAutos(autos);
+});
+
+// Event Listeners para el formulario
+const marca = document.querySelector('#marca');
+marca.addEventListener('input', e => {
+    datosBusqueda.marca = e.target.value;
+
+    // Mandar llamar la función de filtrar Autos
+    filtrarAuto();
 });
 
 function mostrarAutos(autos) {
@@ -159,4 +178,8 @@ function mostrarAutos(autos) {
         contenedor.appendChild(autoHTML);
     });
 
+}
+
+function filtrarAuto() {
+    console.log('desde filtrar auto');
 }
