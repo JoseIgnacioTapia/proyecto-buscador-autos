@@ -173,6 +173,41 @@ year.addEventListener('input', e => {
     filtrarAuto();
 });
 
+const minimo = document.querySelector('#minimo');
+minimo.addEventListener('input', e => {
+    datosBusqueda.minimo = Number(e.target.value);
+    // Mandar llamar la función de filtrar autos
+    filtrarAuto();
+});
+
+const maximo = document.querySelector('#maximo');
+maximo.addEventListener('input', e => {
+    datosBusqueda.maximo = Number(e.target.value);
+    // Manda llamar la función de filtrar autos
+    filtrarAuto();
+});
+
+const puertas = document.querySelector('#puertas');
+puertas.addEventListener('input', e => {
+    datosBusqueda.puertas = Number(e.target.value);
+    // Manda llamar la función de filtrar autos
+    filtrarAuto();
+});
+
+const transmision = document.querySelector('#transmision');
+transmision.addEventListener('input', e => {
+    datosBusqueda.transmision = e.target.value;
+    // Manda a llamar la función filtrar autos
+    filtrarAuto();
+});
+
+const color = document.querySelector('#color');
+color.addEventListener('input', e => {
+    datosBusqueda.color = e.target.value;
+    // Manda a llamar la función filtrar autos
+    filtrarAuto();
+});
+
 function mostrarAutos(autos) {
 
     // Leer el elemento Resultado
@@ -195,7 +230,7 @@ function mostrarAutos(autos) {
 }
 
 function filtrarAuto() {
-    const resultado = obtenerAutos().filter(filtrarMarca).filter(filtrarYear);
+    const resultado = obtenerAutos().filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
 
     if(resultado.length) {
         mostrarAutos(resultado);
@@ -215,6 +250,46 @@ function filtrarMarca(auto) {
 function filtrarYear(auto) {
     if(datosBusqueda.year) {
         return auto.year === datosBusqueda.year;    
+    } else {
+        return auto;
+    }
+}
+
+function filtrarMinimo(auto) {
+    if(datosBusqueda.minimo) {
+        return auto.precio >= datosBusqueda.minimo;
+    } else {
+        return auto;
+    }
+}
+
+function filtrarMaximo(auto) {
+    if(datosBusqueda.maximo) {
+        return auto.precio <= datosBusqueda.maximo;
+    } else {
+        return auto;
+    }
+}
+
+function filtrarPuertas(auto) {
+    if (datosBusqueda.puertas) {
+        return auto.puertas === datosBusqueda.puertas;
+    } else {
+        return auto;
+    }
+}
+
+function filtrarTransmision(auto) {
+    if (datosBusqueda.transmision) {
+        return auto.transmision === datosBusqueda.transmision;
+    } else {
+        return auto;
+    }
+}
+
+function filtrarColor(auto) {
+    if (datosBusqueda.color) {
+        return auto.color === datosBusqueda.color;
     } else {
         return auto;
     }
